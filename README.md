@@ -1,6 +1,3 @@
-Вот чистый текст для README.md (копируйте и вставляйте):
-
-```markdown
 # 🍽️ What's For Dinner?
 
 [![Flask](https://img.shields.io/badge/Flask-2.3-black)](https://flask.palletsprojects.com/)
@@ -137,49 +134,7 @@ When logged in, you can mark recipes with:
 - ⏰ **Will Cook** - Plan to make soon
 - ✅ **Cooked** - Track what you've made
 
-### 4. Reviews & Ratings
-- Leave ratings (1-5 stars)
-- Write comments
-- See what other users think
 
----
-
-## 🗄️ Database Schema
-
-### recipes Table
-| Column | Description |
-|--------|-------------|
-| id | Unique recipe ID |
-| name | Recipe name |
-| category | first/second/appetizers/desserts |
-| ingredients | Comma-separated ingredients |
-| instructions | Step-by-step cooking guide |
-| cooking_time | Minutes to prepare |
-| servings | Number of portions |
-| source | Cuisine origin |
-| rating | Average user rating |
-| description | Short recipe description |
-
-### reviews Table
-| Column | Description |
-|--------|-------------|
-| id | Unique review ID |
-| recipe_id | Foreign key to recipes |
-| username | Reviewer's name |
-| rating | 1-5 star rating |
-| comment | Review text |
-| date | Timestamp |
-
-### user_actions Table
-| Column | Description |
-|--------|-------------|
-| id | Unique action ID |
-| username | User's name |
-| recipe_id | Foreign key to recipes |
-| action | favorite/will_cook/cooked |
-| date | Timestamp |
-
----
 
 ## 🎨 API Endpoints
 
@@ -189,16 +144,6 @@ When logged in, you can mark recipes with:
 | `/action/<recipe_id>/<action>` | GET | Save user action |
 | `/add_review/<recipe_id>` | POST | Add a review to a recipe |
 
----
-
-## 🚧 Future Enhancements
-
-- [ ] OCR Receipt Scanner - Real text recognition from receipt photos
-- [ ] ML Recommendations - Personalized recipe suggestions based on history
-- [ ] Shopping List - Auto-generate missing ingredients list
-- [ ] Social Features - Share recipes, follow other users
-- [ ] Recipe Creator - Allow users to add their own recipes
-- [ ] Dietary Filters - Vegetarian, vegan, gluten-free options
 
 ---
 
@@ -237,6 +182,3 @@ If this project helped you, please give it a ⭐ on GitHub!
 ---
 
 *Made with ❤️ for the love of cooking and coding*
-```
-
-Всё, просто скопируйте этот текст и вставьте в файл `README.md` на GitHub!
