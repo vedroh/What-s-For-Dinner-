@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h2 class="mb-4 text-center">📱 Scan your receipt</h2>
+        
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <div class="text-center">
+                    <div class="upload-area border border-dashed border-primary rounded-3 p-5 mb-4" style="cursor: pointer;" onclick="document.getElementById('receiptPhoto').click()">
+                        <i class="fas fa-camera fa-4x text-primary mb-3"></i>
+                        <h5>Upload a photo of receipt</h5>
+                        <p class="text-muted mb-3">Click here or drag and drop</p>
+                        <input type="file" class="d-none" id="receiptPhoto" accept="image/*" onchange="handleFileSelect(this)">
+                    </div>
+                    
+                    <div id="file-info" class="alert alert-info mb-4" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span id="file-name"></span>
+                    </div>
+                    
+                    <button class="btn btn-success btn-lg px-5" id="analyzeBtn" onclick="analyzeReceipt()">
+                        <i class="fas fa-magic me-2"></i> Analyze and find recipes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Результаты анализа -->
+        <div id="results" class="mt-5" style="display: none;">
+            <div class="alert alert-success">
+                <h5><i class="fas fa-check-circle me-2"></i>Recipes found based on your receipt:</h5>
+                <div class="row g-3 mt-3" id="receipt-results">
+                    <!-- Results will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function handleFileSelect(input) {
+    if (input.files && input.files[0]) {
+        const fileName = input.files[0].name;
+        document.getElementById('file-name').textContent = fileName;
+        document.getElementById('file-info').style.display = 'block';
+    }
+}
+
+function analyzeReceipt() {
+    const photo = document.getElementById('receiptPhoto').files[0];
+    
+    if (!photo) {
+        alert('Please upload a receipt photo');
+        return;
+    }
+    
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const resultsDiv = document.getElementById('results');
+    const resultsContainer = document.getElementById('receipt-results');
+    
+    analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+    analyzeBtn.disabled = true;
+    
+    // Здесь будет интеграция с ML моделью для распознавания чеков
+    // Пока используем демо-данные
+    setTimeout(() => {
+        const demoProducts = ['potatoes', 'onion', 'carrots'];
+        
+        // Ищем рецепты по распознанным продуктам
+        fetch(`/api/search_recipes?ingredients=${encodeURIComponent(demoProducts.join(','))}`)
+            .then(response => response.json())
+            .then(recipes => {
+                resultsDiv.style.display = 'block';
+                
+                if (recipes.length === 0) {
+                    resultsContainer.innerHTML = '<div class="col-12"><div class="alert alert-warning">No recipes found for the recognized products</div></div>';
+                } else {
+                    let html = '';
+                    recipes.slice(0, 3).forEach(recipe => {
+                        html += `
+                            <div class="col-md-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6>${recipe.name}</h6>
+                                        <div class="progress mb-2">
+                                            <div class="progress-bar bg-success" style="width: ${recipe.match_percentage}%"></div>
+                                        </div>
+                                        <small>${recipe.match_percentage}% match</small>
+                                        <a href="/recipe/${recipe.id}" class="btn btn-sm btn-outline-success d-block mt-2">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    resultsContainer.innerHTML = html;
+                }
+                
+                analyzeBtn.innerHTML = '<i class="fas fa-magic me-2"></i> Analyze and find recipes';
+                analyzeBtn.disabled = false;
+            });
+    }, 2000);
+}
+</script>
+{% endblock %}

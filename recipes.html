@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    {% set titles = {'first':'First Dishes', 'second':'Main Dishes', 'appetizers':'Appetizers', 'desserts':'Desserts'} %}
+    <h2 class="fw-bold">{{ titles.get(category, 'Recipes') }} 
+        <span class="badge bg-primary ms-2">{{ recipes|length }}</span>
+    </h2>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to main page
+    </a>
+</div>
+
+{% if recipes %}
+<div class="row g-4">
+    {% for recipe in recipes %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card recipe-card h-100 shadow-sm">
+            <div class="card-img-top bg-gradient d-flex align-items-center justify-content-center" 
+                 style="height: 200px; background: linear-gradient(135deg, #667eea, #764ba2);">
+                <i class="fas fa-utensils fa-4x text-white"></i>
+            </div>
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-bold">{{ recipe.name }}</h5>
+                <p class="card-text text-muted small">{{ recipe.description[:80] }}...</p>
+                
+                <div class="mb-3">
+                    <span class="badge bg-success">⭐ {{ recipe.rating }}</span>
+                    <span class="badge bg-info ms-1">🕒 {{ recipe.cooking_time }} min</span>
+                    <span class="badge bg-secondary ms-1">👥 {{ recipe.servings }}</span>
+                </div>
+                
+                <!-- Action buttons -->
+                <div class="d-flex gap-2 mb-3">
+                    <button class="btn btn-sm btn-outline-danger action-btn flex-fill" 
+                            data-id="{{ recipe.id }}" data-action="favorite">
+                        <i class="fa-{% if user_actions and user_actions.get(recipe.id) == 'favorite' %}solid{% else %}regular{% endif %} fa-heart"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-success action-btn flex-fill" 
+                            data-id="{{ recipe.id }}" data-action="will_cook">
+                        <i class="fa-{% if user_actions and user_actions.get(recipe.id) == 'will_cook' %}solid{% else %}regular{% endif %} fa-clock"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary action-btn flex-fill" 
+                            data-id="{{ recipe.id }}" data-action="cooked">
+                        <i class="fa-{% if user_actions and user_actions.get(recipe.id) == 'cooked' %}solid{% else %}regular{% endif %} fa-check-circle"></i>
+                    </button>
+                </div>
+                
+                <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}" class="btn btn-primary mt-auto">
+                    View Recipe <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info text-center">
+    <i class="fas fa-info-circle me-2"></i>No recipes in this category yet.
+</div>
+{% endif %}
+
+<script>
+$(document).ready(function() {
+    $('.action-btn').click(function() {
+        var btn = $(this);
+        var recipeId = btn.data('id');
+        var action = btn.data('action');
+        
+        $.get('/action/' + recipeId + '/' + action, function(response) {
+            if (response.success) {
+                // Update all buttons for this recipe
+                $(`.action-btn[data-id="${recipeId}"]`).each(function() {
+                    var actionBtn = $(this);
+                    var btnAction = actionBtn.data('action');
+                    var icon = actionBtn.find('i');
+                    
+                    if (btnAction === response.action) {
+                        icon.removeClass('fa-regular').addClass('fa-solid');
+                        actionBtn.removeClass('btn-outline-danger btn-outline-success btn-outline-primary')
+                            .addClass(btnAction === 'favorite' ? 'btn-danger' : 
+                                    btnAction === 'will_cook' ? 'btn-success' : 'btn-primary');
+                    } else {
+                        icon.removeClass('fa-solid').addClass('fa-regular');
+                        actionBtn.removeClass('btn-danger btn-success btn-primary')
+                            .addClass('btn-outline-danger btn-outline-success btn-outline-primary');
+                    }
+                });
+            }
+        }).fail(function() {
+            alert('Please log in to save recipes!');
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,48 @@
+
+       <!-- Отзывы -->
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">💬 Reviews ({{ reviews|length }})</h4>
+            </div>
+            <div class="card-body">
+                {% if session.get('username') %}
+                <form method="POST" action="{{ url_for('add_review', recipe_id=recipe.id) }}" class="mb-4">
+                    <h5>Leave a review:</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Rating:</label>
+                        <select name="rating" class="form-select" style="width: auto;">
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Good</option>
+                            <option value="3">3 - Average</option>
+                            <option value="2">2 - Below average</option>
+                            <option value="1">1 - Poor</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Comment:</label>
+                        <textarea name="comment" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit review</button>
+                </form>
+                {% else %}
+                <div class="alert alert-info">
+                    <a href="{{ url_for('login_page') }}">Log in</a> to leave a review.
+                </div>
+                {% endif %}
+
+                {% if reviews %}
+                {% for review in reviews %}
+                <div class="border-bottom mb-3 pb-2">
+                    <div class="d-flex justify-content-between">
+                        <strong>{{ review.username }}</strong>
+                        <span class="text-warning">{{ '⭐' * review.rating }}</span>
+                    </div>
+                    <p>{{ review.comment }}</p>
+                    <small class="text-muted">{{ review.date }}</small>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-muted">No reviews yet. Be the first!</p>
+                {% endif %}
+            </div>
+        </div>

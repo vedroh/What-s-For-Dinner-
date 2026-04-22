@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <h2 class="mb-4">🔍 Search recipes by products</h2>
+        <div class="card shadow-lg">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Input products you have</h5>
+            </div>
+            <div class="card-body">
+                <form id="searchForm">
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="3" id="ingredients" 
+                                  placeholder="Enter products separated by commas..."></textarea>
+                        <small class="text-muted">Example: chicken, potatoes, onion, carrots</small>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Search recipes</button>
+                    </div>
+                </form>
+                
+                <div id="results" class="mt-4" style="display: none;">
+                    <hr>
+                    <h5 id="results-title">Suitable recipes: </h5>
+                    <div id="search-results" class="row g-3">
+                        <!-- Results will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const ingredients = document.getElementById('ingredients').value;
+    
+    if (!ingredients.trim()) {
+        alert('Please enter at least one product');
+        return;
+    }
+    
+    const resultsDiv = document.getElementById('results');
+    const resultsContainer = document.getElementById('search-results');
+    const resultsTitle = document.getElementById('results-title');
+    
+    // Показываем загрузку
+    resultsDiv.style.display = 'block';
+    resultsContainer.innerHTML = '<div class="text-center my-4"><div class="spinner-border text-success" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+    
+    // Отправляем запрос к API
+    fetch(`/api/search_recipes?ingredients=${encodeURIComponent(ingredients)}`)
+        .then(response => response.json())
+        .then(recipes => {
+            if (recipes.length === 0) {
+                resultsContainer.innerHTML = '<div class="alert alert-warning">No recipes found with these ingredients</div>';
+                resultsTitle.textContent = 'No recipes found:';
+                return;
+            }
+            
+            resultsTitle.textContent = `Found ${recipes.length} recipes:`;
+            
+            let html = '';
+            recipes.forEach(recipe => {
+                html += `
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">${recipe.name}</h5>
+                                <p class="card-text small text-muted">${recipe.description}</p>
+                                <div class="mb-2">
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-success" style="width: ${recipe.match_percentage}%">
+                                            ${recipe.match_percentage}% match
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="/recipe/${recipe.id}" class="btn btn-sm btn-outline-primary">View recipe</a>
+                                    <small class="text-muted">🕒 ${recipe.cooking_time} min | ⭐ ${recipe.rating}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = html;
+        })
+        .catch(error => {
+            resultsContainer.innerHTML = '<div class="alert alert-danger">Error loading recipes</div>';
+            console.error('Error:', error);
+        });
+});
+</script>
+{% endblock %}
