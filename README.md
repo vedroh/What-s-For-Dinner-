@@ -18,14 +18,14 @@ Simply scan your grocery receipt or type in the ingredients you have at home, an
 
 | Feature | Description |
 |---------|-------------|
-| 🤖 **Smart Search** | Find recipes by ingredients - enter what you have, get what you can cook |
-| 📷 **Receipt Scanner** | Upload a photo of your grocery receipt (AI-ready) |
-| ❤️ **Recipe Actions** | Mark recipes as Favorite, Will Cook, or Already Cooked |
-| 👤 **User Profile** | Track your cooking statistics and saved recipes |
-| ⭐ **Reviews & Ratings** | Leave comments and rate recipes you've tried |
-| 📱 **Responsive Design** | Works perfectly on desktop, tablet, and mobile |
+| **Smart Search** | Find recipes by ingredients - enter what you have, get what you can cook |
+| **Receipt Scanner** | Upload a photo of your grocery receipt (AI-ready) |
+| **Recipe Actions** | Mark recipes as Favorite, Will Cook, or Already Cooked |
+| **User Profile** | Track your cooking statistics and saved recipes |
+| **Reviews & Ratings** | Leave comments and rate recipes you've tried |
+| **Responsive Design** | Works perfectly on desktop, tablet, and mobile |
 
-### 🗂️ Recipe Categories
+### Recipe Categories
 
 - 🍲 **First Dishes** - Soups, borscht, fish soup
 - 🍛 **Main Dishes** - Plov, pasta, meat dishes
@@ -77,40 +77,6 @@ whats-for-dinner/
 
 ---
 
-## 🔧 Installation
-
-### Prerequisites
-- Python 3.8 or higher
-
-### Steps
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/whats-for-dinner.git
-cd whats-for-dinner
-```
-
-2. **Create a virtual environment**
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. **Install Flask**
-```bash
-pip install flask
-```
-
-4. **Run the application**
-```bash
-python main.py
-```
-
-5. **Open your browser**
-```
-http://127.0.0.1:5000
-```
-
 ### Default Login Credentials
 
 | Username | Password | Role |
@@ -120,7 +86,7 @@ http://127.0.0.1:5000
 
 ---
 
-## 🎯 How It Works
+## How It Works
 
 ### 1. Search by Ingredients
 Enter ingredients separated by commas (e.g., "chicken, potatoes, onion"). The app compares your ingredients against recipe databases and returns matches sorted by relevance.
@@ -136,7 +102,7 @@ When logged in, you can mark recipes with:
 
 
 
-## 🎨 API Endpoints
+## API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -145,40 +111,11 @@ When logged in, you can mark recipes with:
 | `/add_review/<recipe_id>` | POST | Add a review to a recipe |
 
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
----
-
-## 📧 Contact
+##  Contact
 
 **Team Members:**
 - @vedroh
 - @eva_chernaya
 - @Khorets_Ekaterina
-
-**Project Link:** [https://github.com/yourusername/whats-for-dinner](https://github.com/yourusername/whats-for-dinner)
-
----
-
-## 📄 License
-
-Distributed under the MIT License.
-
----
-
-## ⭐ Show Your Support
-
-If this project helped you, please give it a ⭐ on GitHub!
-
----
 
 *Made with ❤️ for the love of cooking and coding*
