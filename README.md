@@ -1,3 +1,6 @@
+Вот чистый текст для README.md (копируйте и вставляйте):
+
+```markdown
 # 🍽️ What's For Dinner?
 
 [![Flask](https://img.shields.io/badge/Flask-2.3-black)](https://flask.palletsprojects.com/)
@@ -49,3 +52,191 @@ Simply scan your grocery receipt or type in the ingredients you have at home, an
 ---
 
 ## 📂 Project Structure
+
+```
+whats-for-dinner/
+├── main.py                 # Flask application with routes
+├── recipes_data.py         # Recipe dataset (8 curated recipes)
+├── recipes.db              # SQLite database (auto-generated)
+├── static/
+│   ├── css/
+│   │   ├── bootstrap.min.css
+│   │   └── style.css
+│   ├── js/
+│   │   ├── bootstrap.min.js
+│   │   └── script.js
+│   └── images/
+│       └── favicon.png
+└── templates/
+    ├── base.html
+    ├── index.html
+    ├── recipes.html
+    ├── recipe_detail.html
+    ├── search.html
+    ├── scan.html
+    ├── profile.html
+    └── login.html
+```
+
+---
+
+## 🔧 Installation
+
+### Prerequisites
+- Python 3.8 or higher
+
+### Steps
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/whats-for-dinner.git
+cd whats-for-dinner
+```
+
+2. **Create a virtual environment**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install Flask**
+```bash
+pip install flask
+```
+
+4. **Run the application**
+```bash
+python main.py
+```
+
+5. **Open your browser**
+```
+http://127.0.0.1:5000
+```
+
+### Default Login Credentials
+
+| Username | Password | Role |
+|----------|----------|------|
+| admin | 12345 | Administrator |
+| user | 1234 | Regular user |
+
+---
+
+## 🎯 How It Works
+
+### 1. Search by Ingredients
+Enter ingredients separated by commas (e.g., "chicken, potatoes, onion"). The app compares your ingredients against recipe databases and returns matches sorted by relevance.
+
+### 2. Receipt Scanner (Demo)
+Upload a photo of your grocery receipt. The app currently uses demo data to show matching recipes (OCR integration coming soon).
+
+### 3. Recipe Actions
+When logged in, you can mark recipes with:
+- ❤️ **Favorite** - Save for later
+- ⏰ **Will Cook** - Plan to make soon
+- ✅ **Cooked** - Track what you've made
+
+### 4. Reviews & Ratings
+- Leave ratings (1-5 stars)
+- Write comments
+- See what other users think
+
+---
+
+## 🗄️ Database Schema
+
+### recipes Table
+| Column | Description |
+|--------|-------------|
+| id | Unique recipe ID |
+| name | Recipe name |
+| category | first/second/appetizers/desserts |
+| ingredients | Comma-separated ingredients |
+| instructions | Step-by-step cooking guide |
+| cooking_time | Minutes to prepare |
+| servings | Number of portions |
+| source | Cuisine origin |
+| rating | Average user rating |
+| description | Short recipe description |
+
+### reviews Table
+| Column | Description |
+|--------|-------------|
+| id | Unique review ID |
+| recipe_id | Foreign key to recipes |
+| username | Reviewer's name |
+| rating | 1-5 star rating |
+| comment | Review text |
+| date | Timestamp |
+
+### user_actions Table
+| Column | Description |
+|--------|-------------|
+| id | Unique action ID |
+| username | User's name |
+| recipe_id | Foreign key to recipes |
+| action | favorite/will_cook/cooked |
+| date | Timestamp |
+
+---
+
+## 🎨 API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/search_recipes?ingredients=...` | GET | Search recipes by ingredients |
+| `/action/<recipe_id>/<action>` | GET | Save user action |
+| `/add_review/<recipe_id>` | POST | Add a review to a recipe |
+
+---
+
+## 🚧 Future Enhancements
+
+- [ ] OCR Receipt Scanner - Real text recognition from receipt photos
+- [ ] ML Recommendations - Personalized recipe suggestions based on history
+- [ ] Shopping List - Auto-generate missing ingredients list
+- [ ] Social Features - Share recipes, follow other users
+- [ ] Recipe Creator - Allow users to add their own recipes
+- [ ] Dietary Filters - Vegetarian, vegan, gluten-free options
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+---
+
+## 📧 Contact
+
+**Team Members:**
+- @vedroh
+- @eva_chernaya
+- @Khorets_Ekaterina
+
+**Project Link:** [https://github.com/yourusername/whats-for-dinner](https://github.com/yourusername/whats-for-dinner)
+
+---
+
+## 📄 License
+
+Distributed under the MIT License.
+
+---
+
+## ⭐ Show Your Support
+
+If this project helped you, please give it a ⭐ on GitHub!
+
+---
+
+*Made with ❤️ for the love of cooking and coding*
+```
+
+Всё, просто скопируйте этот текст и вставьте в файл `README.md` на GitHub!
