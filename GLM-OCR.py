@@ -11,7 +11,7 @@ ALLOWED_PRODUCTS = [
     "Bread", "Chicken Wings", "Coffee Creamer",
     "APPLE", "BANANA", "ORANGE", "PEAR", "GRAPES", "STRAWBERRY",
     "BLUEBERRY", "KIWI", "WATERMELON", "LEMON", "RASPBERRY",
-    "MILK", "CHEESE", "YOGURT", "apple", "banana", "orange", "grape", "strawberry", "blueberry", "raspberry",
+    "MILK", , "YOGURT", "apple", "banana", "orange", "grape", "strawberry", "blueberry", "raspberry",
     "blackberry", "cherry", "peach", "pear", "plum", "apricot", "mango", "pineapple", "watermelon", "cantaloupe",
     "kiwi", "papaya", "pomegranate", "fig", "date", "avocado", "lemon", "lime", "grapefruit", "tangerine", "coconut",
     "cranberry", "gooseberry", "mulberry", "elderberry", "passionfruit", "dragonfruit", "lychee", "guava", "persimmon",
