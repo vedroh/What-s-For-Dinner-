@@ -1,0 +1,6 @@
+pipeline:
+  ocr_api:
+    api_host: open.bigmodel.cn
+    api_port: 443
+    api_scheme: https
+    api_key: sk-334aa19f47a5496f8a2f3cb1474a6f07.QDTeOJE2TqcUTiYM
