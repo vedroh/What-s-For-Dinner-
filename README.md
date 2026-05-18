@@ -1,6 +1,6 @@
 # 🍽️ What's For Dinner?
 
-![Котенок-поваренок](images/kotenok-povarenok.jpg)
+![Котенок-поваренок](kotenok-povarenok.jpg)
 
 **AI-powered recipe finder that helps you cook delicious meals using ingredients you already have!**
 
