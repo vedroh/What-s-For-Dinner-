@@ -1,9 +1,6 @@
 # 🍽️ What's For Dinner?
 
-[![Flask](https://img.shields.io/badge/Flask-2.3-black)](https://flask.palletsprojects.com/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple)](https://getbootstrap.com/)
-[![SQLite](https://img.shields.io/badge/SQLite-3-blue)](https://sqlite.org/)
-
+images/kotenok-povarenok.jpg
 **AI-powered recipe finder that helps you cook delicious meals using ingredients you already have!**
 
 ---
