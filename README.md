@@ -32,6 +32,13 @@ Simply scan your grocery receipt or type in the ingredients you have at home, an
 
 ---
 
+### 🎯 Target Audience
+
+- **Home Cooks & Homemakers** – Ideal for anyone managing daily household meals who wants to save time, reduce food waste, and easily plan family dinners.
+- **Cooking Enthusiasts** – Perfect for food lovers who enjoy experimenting with new dishes, tracking their culinary progress, and building a personalized recipe collection.
+
+---
+
 ## 🛠️ Built With
 
 ### Backend
