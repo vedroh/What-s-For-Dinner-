@@ -5,19 +5,20 @@
     --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Hero section */
-.hero-section {
-    background: var(--primary-gradient);
-    border-radius: 30px;
-    padding: 4rem;
-    margin-bottom: 3rem;
-    animation: fadeInUp 0.8s ease-out;
+main {
+    flex: 1;
 }
 
 /* Recipe cards */
@@ -39,6 +40,7 @@ body {
     transition: transform 0.4s ease;
     height: 200px;
     object-fit: cover;
+    border-radius: 20px 20px 0 0 !important;
 }
 
 .recipe-card:hover .card-img-top {
@@ -111,6 +113,15 @@ body {
     box-shadow: 0 15px 30px rgba(0,0,0,0.12);
 }
 
+.stats-card .display-4 {
+    font-size: 2.5rem;
+}
+
+.stats-card .h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
 /* Buttons */
 .btn {
     border-radius: 50px;
@@ -152,10 +163,22 @@ body {
     transform: translateX(5px);
 }
 
-/* Action buttons group */
-.action-buttons .btn {
-    flex: 1;
-    margin: 0 3px;
+.action-btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.btn-danger, .btn-success, .btn-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover, .btn-outline-success:hover, .btn-outline-primary:hover {
+    transform: translateY(-1px);
 }
 
 /* Forms */
@@ -190,27 +213,6 @@ body {
     border-radius: 50px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.recipe-card, .feature-card, .stats-card, .category-card {
-    animation: fadeIn 0.5s ease-out;
-}
-
 /* Upload area */
 .upload-area {
     transition: all 0.3s ease;
@@ -220,6 +222,61 @@ body {
 .upload-area:hover {
     background: linear-gradient(45deg, #f0f8ff, #e6f3ff) !important;
     transform: scale(1.02);
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+footer a:hover {
+    color: white !important;
+    text-decoration: underline !important;
+}
+
+/* Links */
+a.text-decoration-none {
+    color: #667eea;
+    transition: color 0.3s;
+}
+
+a.text-decoration-none:hover {
+    color: #764ba2;
+    text-decoration: underline !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.recipe-card, .feature-card, .stats-card, .category-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.toast {
+    animation: slideInRight 0.3s ease-out;
 }
 
 /* Responsive */
@@ -258,19 +315,4 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-/* Navbar customization */
-.navbar {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.navbar-brand {
-    font-size: 1.8rem;
-}
-
-/* Footer */
-footer a:hover {
-    color: white !important;
-    text-decoration: underline !important;
 }
